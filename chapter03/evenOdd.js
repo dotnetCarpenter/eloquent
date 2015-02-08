@@ -8,7 +8,7 @@ if(process && process.argv) { // test if we are in a nodejs compatible environme
 var testNumber = Number(input) || 51;
 console.log( "Is %d even or odd?\nIt is %s.", testNumber, isEvenOdd(testNumber) );
 
-// "node evenOdd.js 35931" is maximun before: RangeError: Maximum call stack size exceeded on my machine (Lenovo S440, win7, node v0.10.36)
+// "node evenOdd.js 35931" is maximum before: RangeError: Maximum call stack size exceeded on my machine (Lenovo S440, win7, node v0.10.36)
 function isEvenOdd(n) {
   n = Math.abs(n);
   if(n == 0)
