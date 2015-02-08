@@ -1,6 +1,8 @@
 var input;
 if(process && process.argv) { // test if we are in a nodejs compatible environment
-  input = process.argv[process.argv.length-1].replace("node", "");
+  if(process.argv.length > 2) {
+    input = process.argv[process.argv.length-1];
+  }
 }
 
 var testNumber = Number(input) || 51;
