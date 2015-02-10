@@ -10,7 +10,10 @@ console.log( "Is %d even or odd?\nIt is %s.", testNumber, isEvenOdd(testNumber) 
 
 // "node evenOdd.js 35931" is maximum before: RangeError: Maximum call stack size exceeded on my machine (Lenovo S440, win7, node v0.10.36)
 function isEvenOdd(n) {
-  n = Math.abs(n);
+  // n = Math.abs(n);
+  if(n < 0)
+    n *= -1;
+
   if(n == 0)
     return "even";
   else if(n == 1)
