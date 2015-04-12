@@ -13,21 +13,21 @@ if(process && process.argv) { // test if we are in a nodejs compatible environme
 var testString = input || "reverseArrayInPlace([1,2,3,4,5,6])";
 console.log(testString + " eval to:", eval(testString));
 
-function reverseArrayInPlace(list) { // version 2
+function reverseArrayInPlace(array) { // version 2
   if(DEBUG)
-    console.log(list)
+    console.log(array)
 
-  for(var i = 0, len = list.length; i < len/2; i++) {
+  for(var i = 0, len = array.length; i < len/2; i++) {
     var opposite = getOppositeInRangeFromZero(len, i);
-    var n1 = list[i];
-    var n2 = list[opposite];
-    list[i] = n2;
-    list[opposite] = n1;
+    var n1 = array[i];
+    var n2 = array[opposite];
+    array[i] = n2;
+    array[opposite] = n1;
 
     if(DEBUG)
-      console.log(list, opposite);
+      console.log(array, opposite);
   }
-  return list;
+  return array;
 }
 
 function getOppositeInRangeFromZero(range, n) {

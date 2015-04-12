@@ -8,10 +8,10 @@ if(process && process.argv) { // test if we are in a nodejs compatible environme
 var testString = input || "sum(range(1, 10))";
 console.log(testString + " eval to:", eval(testString));
 
-function sum(list) {
+function sum(array) {
   var ret = 0;
-  for(var i = 0, len = list.length; i < len; i++) {
-    ret += list[i];
+  for(var i = 0, len = array.length; i < len; i++) {
+    ret += array[i];
   }
   return ret;
 }

@@ -8,11 +8,11 @@ if(process && process.argv) { // test if we are in a nodejs compatible environme
 var testString = input || "reverseArray([1,2,3,4,5,6])";
 console.log(testString + " eval to:", eval(testString));
 
-function reverseArray(list) {
+function reverseArray(array) {
   var ret = [];
 
-  for(var i = list.length - 1; i >= 0; i--)
-    ret.push(list[i]);
+  for(var i = array.length - 1; i >= 0; i--)
+    ret.push(array[i]);
 
   return ret;
 }
