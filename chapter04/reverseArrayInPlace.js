@@ -18,7 +18,7 @@ function reverseArrayInPlace(array) { // version 2
     console.log(array)
 
   for(var i = 0, len = array.length; i < len/2; i++) {
-    var opposite = getOppositeInRangeFromZero(len, i);
+    var opposite = len - (1 + n);
     var n1 = array[i];
     var n2 = array[opposite];
     array[i] = n2;
@@ -28,8 +28,4 @@ function reverseArrayInPlace(array) { // version 2
       console.log(array, opposite);
   }
   return array;
-}
-
-function getOppositeInRangeFromZero(range, n) {
-  return range - (1 + n);
 }
