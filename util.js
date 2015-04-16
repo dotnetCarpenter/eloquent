@@ -11,9 +11,9 @@ module.exports = {
   get debug() {
     return debug;
   },
-  log: function(msg) {
+  log: function() {
     if(debug)
-      console.log(msg);
+      console.log.apply(null, arguments);
   },
   getTestCode: function() {
     var testString = this.defaultInput;
