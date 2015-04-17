@@ -1,0 +1,23 @@
+{
+  "name": "eloquent",
+  "version": "1.0.0",
+  "description": "Code that came to be while reading Eloquent JavaScript",
+  "dependencies": {
+    "commander": "^2.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dotnetCarpenter/eloquent.git"
+  },
+  "author": "dotnetcarpenter <jon.ronnenberg@gmail.com>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/dotnetCarpenter/eloquent/issues"
+  },
+  "homepage": "https://github.com/dotnetCarpenter/eloquent",
+  "private": true
+}
