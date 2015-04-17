@@ -1,8 +1,8 @@
 "use strict";
 
 var debug = false;
-// var SEPERATOR = "0x0";
 var program;
+var testPrograms = [];
 
 module.exports = {
   set debug(bool) {
@@ -16,7 +16,7 @@ module.exports = {
       console.log.apply(null, arguments);
   },
   getTestCode: function() {
-    var testString = this.defaultInput;
+    var testString = testPrograms[0];
 
     if( !process && !process.argv)
       return; // abort if we aren't in a nodejs compatible environment
@@ -24,25 +24,33 @@ module.exports = {
     if(!program && require) { // load commander if it isn't loaded
       program = require("commander");
       program
-        .option("-d, --debug", "Output debug information")
+        .version("1.0.0")
+        .option("-d, --debug", "output debug information")
         .option("-c, --code <code>", "JavaScript code to evaluate")
-      // program
-      //   .command("*")
-      //   .description("JavaScript code to evaluate")
-      //   .action(function(input) {
-      //     var testString = input || self.defaultInput;
-      //     console.log(testString + " eval to:", eval(testString));
-      //   });
     }
+
+    testPrograms.forEach(function(test, i) {
+      program
+        .option("" + i + " --code is ignored " + (i === 0 ? " (default)" : ""), test);
+        // .command("" + i)
+        // .description(test + (i === 0 ? "\t- default" : ""))
+        // .action(/*???*/)
+    });
 
     program.parse(process.argv);
     debug = program.debug;
+
     if(program.code)
-      testString = program.code ;
+      testString = program.code;
+
+    if( testPrograms[ process.argv[2] ] )
+      testString = testPrograms[ process.argv[2] ];
 
     return testString;
   },
-  defaultInput: ""
+  addTest: function(testcode) {
+    testPrograms.push(testcode);
+  }
 }
 
 // function flatten(array) {

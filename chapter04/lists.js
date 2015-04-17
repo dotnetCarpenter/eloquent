@@ -2,7 +2,10 @@
 
 var util = require("../util.js");
 
-util.defaultInput = "arrayToList([1,2,3])";
+// TEST WITH: node lists.js -d -c "listToArray({ value: 3, rest: { value: 2, rest: { value: 1, rest: null } } })"
+
+util.addTest("arrayToList([1,2,3])");
+util.addTest("listToArray(arrayToList([1,2,3]))");
 var code = util.getTestCode();
 try {
   console.log(code + " eval to:", eval(code));
@@ -22,16 +25,16 @@ function arrayToList(array, list) {
 
 function listToArray(list) {
   var ret = [];
-  function deepFirst(list) {
-  	for(var prop in list) {
-      util.log(prop, list[prop], list);
-  	  if(typeof prop === "object")
-   	    return deepFirst(prop);
-   	  ret.push(list[prop])
-  	}
-  }
-  deepFirst(list);
+  depthFirst(list, ret);
   return ret;
+}
+function depthFirst(list, output) {
+  for(var prop in list) {
+    util.log(prop, list[prop], list);
+    if(typeof prop === "object")
+       return depthFirst(prop);
+    output.push(list[prop])
+  }
 }
 
 function prepend(n, list) {
