@@ -2,8 +2,6 @@
 
 var util = require("../util.js");
 
-// TEST WITH: node lists.js -d -c "listToArray({ value: 3, rest: { value: 2, rest: { value: 1, rest: null } } })"
-
 util.addTest("arrayToList([1,2,3])");
 util.addTest("listToArray(arrayToList([1,2,3]))");
 var code = util.getTestCode();
