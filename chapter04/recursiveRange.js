@@ -12,8 +12,7 @@ console.log(testString + " eval to:", eval(testString))
 
 function sum(array) {
   if(array.length === 0) return 0
-  let x  = array[0],
-  let xs = array.slice(1)
+  let [x,...xs] = array
   return x + sum(xs)
 }
 
