@@ -7,13 +7,14 @@ if(process && process.argv) { // test if we are in a nodejs compatible environme
   }
 }
 
-var testString = input || "sum(range(1, 10))"
+var testString = input || "sum(range(1, 10))" // same as range(1,10).reduce((a,b) => a+b)
 console.log(testString + " eval to:", eval(testString))
 
 function sum(array) {
   if(array.length === 0) return 0
-  let x = array[0]
-  return x + sum(array.slice(1))
+  let x  = array[0],
+  let xs = array.slice(1)
+  return x + sum(xs)
 }
 
 function range(start, end, step) {
