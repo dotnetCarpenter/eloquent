@@ -18,7 +18,7 @@ function reverseArrayInPlace(array) { // version 2
     console.log(array)
 
   for(var i = 0, len = array.length; i < len/2; i++) {
-    var opposite = len - (1 + n);
+    var opposite = len - (1 + i);
     var n1 = array[i];
     var n2 = array[opposite];
     array[i] = n2;
