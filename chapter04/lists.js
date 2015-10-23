@@ -36,12 +36,14 @@ console.log("20")
 
 function deepEqual(a, b) {
   if(typeof a !== "object" || a === null) {
-    return a === b
+    if(a !== b) return false
   }
   for(let prop in a) {
     if(!(prop in b)) return false
-    return deepEqual(a[prop], b[prop])
+    if(! deepEqual(a[prop], b[prop]))
+      return false
   }
+  return true
 }
 
 function arrayToList(array) {
