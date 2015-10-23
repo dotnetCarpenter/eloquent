@@ -39,6 +39,7 @@ function deepEqual(a, b) {
     return a === b
   }
   for(let prop in a) {
+    if(!(prop in b)) return false
     return deepEqual(a[prop], b[prop])
   }
 }
