@@ -18,8 +18,9 @@ var list = {
   }
 }
 var array = [1,2,3]
+var obj = {here: {is: "an"}, object: 2};
 
-var testString = input || "equal(list, arrayToList(array) )";
+var testString = input || "deepEqual(list, arrayToList(array) )";
 console.log(testString + " eval to:", eval(testString));
 
 /*
@@ -33,10 +34,13 @@ console.log(nth(arrayToList([10, 20, 30]), 1));
 console.log("20")
 */
 
-function equal(a, b) {
-  console.dir(a)
-  console.dir(b)
-  return "Can you spot the difference?"
+function deepEqual(a, b) {
+  if(typeof a !== "object" || a === null) {
+    return a === b
+  }
+  for(let prop in a) {
+    return deepEqual(a[prop], b[prop])
+  }
 }
 
 function arrayToList(array) {
