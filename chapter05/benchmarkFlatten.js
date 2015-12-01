@@ -6,11 +6,15 @@ const wild = ["a",["b"],"c",1,2,3]
 const crazy = [1,[2],[],3,["a",["b","c"]],["Eloquent"],["JavaScript"]]
 
 let l = console.log
+l("Benchmark results for flatten.js")
+l("================================")
+l()
 outputBenchMark(1)
 outputBenchMark(2)
 outputBenchMark(4)
 outputBenchMark(1e4)
 outputBenchMark(2e4)
+outputBenchMark(25e3)
 outputBenchMark(3e4)
 outputBenchMark(4e4)
 outputBenchMark(8e4)
