@@ -4,31 +4,33 @@ module.exports = flatten;
 
 // flatten :: [a] -> [a]
 function flatten(array) {
-	return array.reduce(function (b, c) {
-		var bIsArray = Array.isArray(b),
-		    cIsArray = Array.isArray(c);
-		var actions = [concat, append, prepend, add];
-		var action = undefined;
-		if (bIsArray && cIsArray) action = actions[0];
-		if (bIsArray && !cIsArray) action = actions[1];
-		if (!bIsArray && cIsArray) action = actions[2];
-		if (!bIsArray && !cIsArray) action = actions[3];
-		return action(b, c);
-	});
+	return array.reduce(flat);
+}
 
-	function append(list, value) {
-		list.push(value);
-		return list;
-	}
-	function prepend(value, list) {
-		list.unshift(value);
-		return list;
-	}
-	function concat(list1, list2) {
-		var list = list1.concat(list2);
-		return flatten(list);
-	}
-	function add(a, b) {
-		return [a, b];
-	}
+function flat(b, c) {
+	var bIsArray = Array.isArray(b),
+	    cIsArray = Array.isArray(c);
+	var actions = [concat, append, prepend, add];
+	var action = undefined;
+	if (bIsArray && cIsArray) action = actions[0];
+	if (bIsArray && !cIsArray) action = actions[1];
+	if (!bIsArray && cIsArray) action = actions[2];
+	if (!bIsArray && !cIsArray) action = actions[3];
+	return action(b, c);
+}
+
+function append(list, value) {
+	list.push(value);
+	return list;
+}
+function prepend(value, list) {
+	list.unshift(value);
+	return list;
+}
+function concat(list1, list2) {
+	var list = list1.concat(list2);
+	return flatten(list);
+}
+function add(a, b) {
+	return [a, b];
 }
