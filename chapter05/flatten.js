@@ -1,7 +1,7 @@
 "use strict"
 
 const dimensional = [[1,2,3], ["a", "b", "c"]]
-const crazy = [1,2,[3],["a",["b","c"]],["Eloquent"],["JavaScript"]]
+const crazy = [1,[2],[3],["a",["b","c"]],["Eloquent"],["JavaScript"]]
 const wild = ["a",["b"],"c",1,2,3]
 var l = console.log
 
@@ -16,7 +16,7 @@ function flatten(array) {
 																		(l("none is array"),[b].concat([c]))  
 	})
 }
-l(wild)
-let flatArray = flatten(wild)
+l(crazy)
+let flatArray = flatten(crazy)
 l( flatArray )
 l( "Test case pass:", flatArray.every(x => !Array.isArray(x)) )
