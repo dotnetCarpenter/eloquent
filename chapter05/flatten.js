@@ -1,8 +1,8 @@
 "use strict"
 
 const dimensional = [[1,2,3], ["a", "b", "c"]]
-const crazy = [1,[2],[3],["a",["b","c"]],["Eloquent"],["JavaScript"]]
 const wild = ["a",["b"],"c",1,2,3]
+const crazy = [1,[2],[],3,["a",["b","c"]],["Eloquent"],["JavaScript"]]
 var l = console.log
 
 // flatten :: [a]
