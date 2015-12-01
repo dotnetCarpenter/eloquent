@@ -28,8 +28,13 @@ function outputBenchMark(bennchmarkRuns) {
 		l("flatten didn't flat the array")
 		return
 	}
-	l("Number of Runs\tTotal Time\t1 Pass Time\t\tMean Time")
-	l("%d\t\t%s\t%s\t\t%s", result.testRuns, result.duration + "s", (result.randomDuration[0] * 1e9 + result.randomDuration[1])/1e9 + "s", result.meanDuration + "s")
+	l("Number of Runs\tTotal Time\t1 Pass Time\tMean Time")
+	l(
+		"%d\t\t%s\t%s\t%s",
+		result.testRuns,
+		result.duration > 60 ? (result.duration/60).toFixed(8) + "m" : result.duration.toFixed(8) + "s",
+		((result.randomDuration[0] * 1e9 + result.randomDuration[1])/1e9).toFixed(8) + "s", result.meanDuration.toFixed(8) + "s"
+	)
 }
 
 function doBenchMark(testcase, howmany) {
@@ -39,7 +44,7 @@ function doBenchMark(testcase, howmany) {
 	
 	do {
 		let start = process.hrtime()
-		flatArray = flatten(crazy)
+		flatArray = flatten(testcase)
 		times[c] = process.hrtime(start)
 		c++
 	} while(c < howmany)
