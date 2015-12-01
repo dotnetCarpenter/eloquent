@@ -1,6 +1,6 @@
 "use strict"
 
-const flatten = require("./flatten.es5")
+const flatten = require("../flatten.es5")
 const dimensional = [[1,2,3], ["a", "b", "c"]]
 const wild = ["a",["b"],"c",1,2,3]
 const crazy = [1,[2],[],3,["a",["b","c"]],["Eloquent"],["JavaScript"]]
