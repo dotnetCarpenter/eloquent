@@ -1,0 +1,23 @@
+Benchmark results for flatten.js
+================================
+
+Number of Runs	Total Time	1 Pass Time		Mean Time
+1		0.000325278s	0.000325278s		0.000325278s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+2		0.000106583s	0.000043423s		0.0000532915s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+4		0.000236065s	0.000044213s		0.00005901625s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+10000		0.086313365s	0.000007896s		0.0000086313365s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+20000		0.169457156s	0.000007501s		0.0000084728578s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+25000		0.23240019s	0.000007895s		0.000009296007600000001s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+30000		0.261406509s	0.000007895s		0.0000087135503s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+40000		0.510949307s	0.0000075s		0.000012773732674999999s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+80000		3.407226765s	0.000035133s		0.000042590334562499995s
+Number of Runs	Total Time	1 Pass Time		Mean Time
+100000		4.221818s	0.000035528s		0.00004221818s
