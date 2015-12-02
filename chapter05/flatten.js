@@ -9,7 +9,7 @@ function flatten(array) {
 				cIsArray = Array.isArray(c);
 		
 		return (!bIsArray && !cIsArray) ? [b,c] :
-						(bIsArray && !cIsArray) ? b.concat([c]) :
+						(bIsArray && !cIsArray) ? b.push(c) :
 						(!bIsArray && cIsArray) ? [b].concat(c) :
 																			flatten(b.concat(c));
 	})
