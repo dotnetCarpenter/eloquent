@@ -8,6 +8,6 @@ function flatten(array) {
 		var bIsArray = Array.isArray(b),
 		    cIsArray = Array.isArray(c);
 
-		return !bIsArray && !cIsArray ? [b].concat([c]) : bIsArray && !cIsArray ? b.concat([c]) : !bIsArray && cIsArray ? [b].concat(c) : flatten(b.concat(c));
+		return !bIsArray && !cIsArray ? [b, c] : bIsArray && !cIsArray ? b.concat([c]) : !bIsArray && cIsArray ? [b].concat(c) : flatten(b.concat(c));
 	});
 }
