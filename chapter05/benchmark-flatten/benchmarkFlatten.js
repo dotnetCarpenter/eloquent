@@ -1,6 +1,11 @@
 "use strict"
+const path = require("path")
+const args = process.argv.slice(2);
+let flattenScriptPath = ""
+if(args.length === 0) flattenScriptPath = "../flatten"
+else flattenScriptPath = path.resolve(__dirname, "..", args[0])
 
-const flatten = require("../flatten.es5")
+const flatten = require(flattenScriptPath)
 const dimensional = [[1,2,3], ["a", "b", "c"]]
 const wild = ["a",["b"],"c",1,2,3]
 const crazy = [1,[2],[],3,["a",["b","c"]],["Eloquent"],["JavaScript"]]
