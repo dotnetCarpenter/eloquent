@@ -4,10 +4,12 @@ module.exports = flatten;
 
 // flatten :: [a] -> [a]
 function flatten(array) {
-	return array.reduce(function (b, c) {
-		var bIsArray = Array.isArray(b),
-		    cIsArray = Array.isArray(c);
+	return array.reduce(reduceFlat);
+}
 
-		return !bIsArray && !cIsArray ? [b, c] : bIsArray && !cIsArray ? b.concat([c]) : !bIsArray && cIsArray ? [b].concat(c) : flatten(b.concat(c));
-	});
+function reduceFlat(a, b) {
+	var aIsArray = Array.isArray(a),
+	    bIsArray = Array.isArray(b);
+
+	return !aIsArray && !bIsArray ? [a, b] : aIsArray && !bIsArray ? a.concat([b]) : !aIsArray && bIsArray ? [a].concat(b) : flatten(a.concat(b));
 }
