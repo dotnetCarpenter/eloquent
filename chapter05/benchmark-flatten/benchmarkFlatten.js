@@ -5,6 +5,9 @@ let flattenScriptPath = ""
 if(args.length === 0) flattenScriptPath = "../flatten"
 else flattenScriptPath = path.resolve(__dirname, "..", args[0])
 
+let outputComputation = false
+if(args.length === 2) outputComputation = true 
+
 const flatten = require(flattenScriptPath)
 const dimensional = [[1,2,3], ["a", "b", "c"]]
 const wild = ["a",["b"],"c",1,2,3]
@@ -26,9 +29,11 @@ outputBenchMark(8e4)
 outputBenchMark(1e5)
 
 function outputBenchMark(bennchmarkRuns) {
-	//l(crazy)
 	const result = doBenchMark(crazy, bennchmarkRuns)
-	//l( result.flatArray )
+	if(outputComputation) {
+		l(crazy)
+		l( result.flatArray )
+	}
 	if(!result.passed) {
 		l("flatten didn't flat the array")
 		return
