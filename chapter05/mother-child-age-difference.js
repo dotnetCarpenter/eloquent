@@ -31,7 +31,7 @@ function zipWith(f, xs, ys) {
 var mothers = ancestry.map(person => person.mother ) // get all the mother names as many times as they appear (duplicates)
                 .filter(name => byName[name]); // remove names of mothers not in set
 var hasMotherInSet = isInSet.bind(null, mothers);
-// everyone who has a mother property that correspon to a name in the mothers set
+// everyone who has a mother property that correspond to a name in the mothers set
 var children = ancestry.filter(person => hasMotherInSet(person.mother));
 
 // since we got all the mother names in the same order as children (we got the mother names from the children), we zip the two sets
@@ -50,3 +50,10 @@ log(
 let averageAgeDifference = average(motherChildPair.map(pair => pair[1].born - pair[0].born));
 log("The average age difference between mother and child is " + averageAgeDifference.toFixed(1) + " years")
 
+// FROM Marijn Haverbeke
+var differences = ancestry.filter(function(person) {
+  return byName[person.mother] != null;
+}).map(function(person) {
+  return person.born - byName[person.mother].born;
+});
+log("The average age difference between mother and child is " + average(differences).toFixed(1) + " years")
