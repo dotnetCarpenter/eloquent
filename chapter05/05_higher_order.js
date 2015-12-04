@@ -35,7 +35,7 @@ function female(p) { return p.sex === "f"; }
 //log( average( ancestry.filter(male).map(age) ) );
 //log( average( ancestry.filter(female).map(age) ) );
 
-log("find shared dna")
+//log("find shared dna")
 function reduceAncestors(person, f, defaultValue) {
   function valueFor(person) {
     if(person == null)
@@ -54,18 +54,20 @@ function sharedDna(person, fromMother, fromFather) {
     return (fromMother + fromFather) / 2;
 }
 let ph = byName["Philibert Haverbeke"];
-log(reduceAncestors(ph, sharedDna, 0) / 4);
-log("Pauwels van Haverbeke's children");
-log(
+//log(reduceAncestors(ph, sharedDna, 0) / 4);
+//log("Pauwels van Haverbeke's children");
+/*log(
   ancestry.filter(person => person.father === "Pauwels van Haverbeke")
-    .map(person => person.name + " (gender: " + person.sex + ")" )
+    .map(person => person.name + ` (gender: ${person.sex})` )
     .join()
-)
+)*/
 
 log("percentage of known ancestors, for a given person who, lived past 70")
 function countAncestors(person, test) {
   function combine(person, fromMother, fromFather) {
-    return fromMother + fromFather + Boolean(test(person));
+    //console.log(person.name, fromMother, fromFather)
+    let thisOneCount = test(person);
+    return fromMother + fromFather + thisOneCount;
   }
   return reduceAncestors(person, combine, 0);
 }
@@ -77,3 +79,9 @@ function longLivingPercentage(person) {
 let name = "Emile Haverbeke";
 log("name: " + name);
 log(longLivingPercentage(byName[name]).toFixed(3));
+
+function isInSet(set, person) {
+  return set.indexOf(person.name) > -1;
+}
+
+/* compute the average age difference between mothers and children (the age of the mother when the child is born) */
