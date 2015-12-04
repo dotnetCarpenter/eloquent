@@ -11,7 +11,7 @@ function reduceFlat(a,b) {
 	let aIsArray = Array.isArray(a),
 			bIsArray = Array.isArray(b);
 
-	return	(aIsArray && bIsArray) ? flatten(a.concat(b)) : // tail call
+	return	(aIsArray && bIsArray) ? flatten(a.concat(b)) : // tail call http://www.ecma-international.org/ecma-262/6.0/#sec-expression-rules
 					(aIsArray && !bIsArray) ? a.concat([b]) :
 					(!aIsArray && bIsArray) ? [a].concat(b) : [a,b];
 }
