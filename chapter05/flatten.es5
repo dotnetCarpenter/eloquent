@@ -4,7 +4,7 @@ module.exports = flatten;
 
 // flatten :: [a] -> [a]
 function flatten(array) {
-	return array.length === 0 ? [] : array.reduce(reduceFlat);
+	return array.length === 0 ? [] : array.reduce(reduceFlat, []);
 }
 
 function reduceFlat(a, b) {
@@ -12,6 +12,6 @@ function reduceFlat(a, b) {
 	    bIsArray = Array.isArray(b);
 
 	return aIsArray && bIsArray ? flatten(a.concat(b)) : // tail call http://www.ecma-international.org/ecma-262/6.0/#sec-expression-rules
-	aIsArray && !bIsArray ? a.concat([b]) : !aIsArray && bIsArray ? [a].concat(b) : [a, b];
+	aIsArray && !bIsArray ? a.concat([b]) : [a].concat(b);
 }
 
