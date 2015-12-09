@@ -4,7 +4,7 @@ module.exports = flatten;
 
 // flatten :: [a] -> [a]
 function flatten(array) {
-	return array.reduce(reduceFlat);
+	return array.length === 0 ? [] : array.reduce(reduceFlat);
 }
 
 function reduceFlat(a,b) {
