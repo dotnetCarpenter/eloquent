@@ -1,28 +1,29 @@
-"use strict"
+'use strict'
 
-const ancestry = JSON.parse(require("./ancestry"))
+const ancestry = JSON.parse(require('./ancestry'));
 const log = console.log;
 
 /* HISTORICAL LIFE EXPECTANCY */
-each(groupBy(ancestry, p => Math.ceil(p.died/100)), (people, century) => {
-  log('In the %dth hundreds, the average age of %d person(s) was %d', century, people.length, averageAge(people));
+let ancestryByCentury = groupBy(ancestry, p => Math.ceil(p.died/100)); 
+each(ancestryByCentury, (people, century) => {
+  log('In the %dth hundreds, the average age of %s person%s was %d', century, people.length, people.length > 1 && 's' || '', averageAge(people));
 });
+
+function groupBy(list, f) {
+  let ret = {};
+  each(list, item => {
+    let key = f(item);
+    if(Array.isArray(ret[key])) ret[key].push(item);
+    else ret[key] = [item];
+  });
+  return ret;
+}
 
 function each(iterable, fn) {
   if( Array.isArray(iterable) ) return iterable.forEach(fn);
   for(let key in iterable) {
     if(iterable.hasOwnProperty(key)) fn( iterable[key], key, iterable );
   }
-}
-
-function groupBy(list, f) {
-  let ret = {};
-  list.forEach(item => {
-    let key = f(item);
-    if(Array.isArray(ret[key])) ret[key].push(item);
-    else ret[key] = [item];
-  });
-  return ret;
 }
 
 function averageAge(list) {
