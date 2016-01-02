@@ -20,7 +20,6 @@ function groupBy(list, f) {
 }
 
 function each(iterable, fn) {
-  if( Array.isArray(iterable) ) return iterable.forEach(fn);
   for(let key in iterable) {
     if(iterable.hasOwnProperty(key)) fn( iterable[key], key, iterable );
   }
