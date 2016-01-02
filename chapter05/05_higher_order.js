@@ -83,5 +83,3 @@ log(longLivingPercentage(byName[name]).toFixed(3));
 function isInSet(set, person) {
   return set.indexOf(person.name) > -1;
 }
-
-/* compute the average age difference between mothers and children (the age of the mother when the child is born) */
