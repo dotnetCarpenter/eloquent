@@ -14,18 +14,14 @@ class EnumerableTrait
     map(fun)
     {
         var r = [];
-        this.each(function (e) {
-            r.push(fun(e));
-        });
+        this.each(e => { r.push(fun(e)); });
         return r;
     }
 
     inject(init, accum)
     {
         var r = init;
-        this.each(function (e) {
-            r = accum(r, e);
-        });
+        this.each(e => { r = accum(r, e)});
         return r;
     }
 }
