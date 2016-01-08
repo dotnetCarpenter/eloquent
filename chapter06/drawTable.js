@@ -1,5 +1,7 @@
 'use strict';
 
+const Trait = require('traits.js');
+
 // Cell interface: .minHeight(), .minWidth(), .draw(width, height)
 
 function rowHeights(rows) {
@@ -85,10 +87,45 @@ RTextCell.prototype.draw = function(width, height) {
   return result;
 };
 
+const Capitalize = Trait({
+  capitalize() {
+    this.text[0] = this.text[0].split(' ').map(
+      word => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase()
+    ).join(' ');
+  }
+});
+function THeaderCell(inner) {
+  return Trait.compose(
+    Capitalize,
+    Trait(new UnderlinedCell(inner)),
+    Trait({
+      // minWidth() { return inner.minWidth() },
+      // minHeight() { return inner.minHeight() },
+      // draw(width, height) {
+      //   this.capitalize();
+      //   return inner.draw(width, height)
+      // },
+      get text() { return inner.text; },
+      set text(value) { inner.text = value; }
+    })
+  );
+}
+function HeaderCell(inner) {
+  return Trait.create(
+    UnderlinedCell.prototype,
+    THeaderCell(inner)
+  );
+}
+//HeaderCell.prototype = Trait.create(UnderlinedCell.prototype, THeaderCell);
+
 // TEST
 function dataTable(data) {
   let keys = Object.keys(data[0]);
-  let headers = keys.map(name => new UnderlinedCell(new TextCell(name)));
+  let headers = keys.map(name =>
+    new HeaderCell( new TextCell(name) )
+  );
+  // capitalize header row
+  headers.forEach(header => { header.capitalize(); });
   let body = data.map(row =>
     keys.map(name => {
       let value = row[name];
@@ -101,12 +138,18 @@ function dataTable(data) {
   return [headers].concat(body);
 }
 
-let datalist = [
+var datalist = [
   {name: "Anita", "super power": "Fearful wrath", team: "ISKRA"},
   {name: "Iskra", "super power": "Sweet peeps", team: "ISKRA"},
-  {name: "Jon", "super power": "Dodged smiles", team: "ISKRA"},
+  {name: "Jon", "super power": "Dodge smiles", team: "ISKRA"},
 ];
-// let datalist = require('./mountains');
+console.log(
+  drawTable(dataTable(datalist)),
+  "\n\n"
+);
+
+var datalist = require('./mountains');
 console.log(
   drawTable(dataTable(datalist))
 );
+
