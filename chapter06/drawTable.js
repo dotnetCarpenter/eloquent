@@ -2,41 +2,6 @@
 
 const Trait = require('traits.js');
 
-// Cell interface: .minHeight(), .minWidth(), .draw(width, height)
-
-function rowHeights(rows) {
-  return rows.map(row =>
-    row.reduce((max, cell) =>
-      Math.max(max, cell.minHeight())
-    , 0)
-  );
-}
-
-function colWidths(rows) {
-  return rows[0].map((_, i) =>
-    rows.reduce((max, row) =>
-     Math.max(max, row[i].minWidth())
-    , 0)
-  );
-}
-
-function drawTable(rows) {
-  let heights = rowHeights(rows),
-      widths = colWidths(rows);
-
-  function drawLine(blocks, lineNo) {
-    return blocks.map(block => block[lineNo]).join(' ');
-  }
-
-  function drawRow(row, rowNum) {
-    let blocks = row.map((cell, colNum) =>
-      cell.draw(widths[colNum], heights[rowNum]));
-    return blocks[0].map((_, lineNo) => drawLine(blocks, lineNo)).join('\n');
-  }
-
-  return rows.map(drawRow).join('\n');
-}
-
 function replicate(string, times) {
   return times < 1 ? '' : (string + replicate(string, times - 1));
 }
@@ -117,6 +82,41 @@ function HeaderCell(inner) {
   );
 }
 //HeaderCell.prototype = Trait.create(UnderlinedCell.prototype, THeaderCell);
+
+// Cell interface: .minHeight(), .minWidth(), .draw(width, height)
+
+function rowHeights(rows) {
+  return rows.map(row =>
+    row.reduce((max, cell) =>
+      Math.max(max, cell.minHeight())
+    , 0)
+  );
+}
+
+function colWidths(rows) {
+  return rows[0].map((_, i) => // create an array of equal size as rows[0]
+    rows.reduce((max, row) => // return the longest length of characters
+     Math.max(max, row[i].minWidth()) // find the longest length of 
+    , 0)
+  );
+}
+
+function drawTable(rows) {
+  let heights = rowHeights(rows),
+      widths = colWidths(rows);
+
+  function drawLine(blocks, lineNo) {
+    return blocks.map(block => block[lineNo]).join(' ');
+  }
+
+  function drawRow(row, rowNum) {
+    let blocks = row.map((cell, colNum) =>
+      cell.draw(widths[colNum], heights[rowNum]));
+    return blocks[0].map((_, lineNo) => drawLine(blocks, lineNo)).join('\n');
+  }
+
+  return rows.map(drawRow).join('\n');
+}
 
 // TEST
 function dataTable(data) {
