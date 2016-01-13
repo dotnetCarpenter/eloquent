@@ -1,14 +1,31 @@
-"use strict";
+### Motivation
+If you have a large code base which make use of prototype inheritance and/or 
+classical object composition, transition to `traits.js` is difficult. I will illustrate
+with simplified examples from 
+[Eloquent JavaScript - Chapter 6](http://eloquentjavascript.net/06_object.html).
+In order to make the examples transparent, I will avoid using syntactic sugar like es6
+classes but will use es6 syntax for abstractions that does nothing to change
+prototypal class behavior.
 
-const Trait = require("traits.js");
+Functions not shown in the examples can be found at the bottom of this post.
 
+The common data structure is an array with 4-tuples. We will render the data in a table and
+encapsulate *cell* logic in classes.
+
+```js
 const dataList = [ // Cannabis varieties - source: http://www.turiba.lv/f/Latvijas_kanepju_nozre.Prieksizpete.pdf
   { breed: "Ferimon", "country of origin": "France", "Seed yield (kg/ha)": "800-900", "Plant height (cm)": "6.2" },
   { breed: "Bialobrzeskie", "country of origin": "Polen", "Seed yield (kg/ha)": "500-1,000", "Plant height (cm)": "8-9" },
   { breed: "USO-31", "country of origin": "Ukraine", "Seed yield (kg/ha)": "700-1,000", "Plant height (cm)": "3.5-7.0" },
   { breed: "Finola", "country of origin": "Finland", "Seed yield (kg/ha)": "400-1,800", "Plant height (cm)": "0.5-1.5" }
 ];
+```
 
+#### Case 1 - Object Composition ####
+
+Foobar
+ 
+```js
 function TextCell(text) {
   this.text = text.split('\n');
 }
@@ -42,34 +59,12 @@ UnderlinedCell.prototype.draw = function(width, height) {
     .concat([replicate('-', width)]);
 };
 
-console.log(drawTable(dataTable(dataList)));
+```
 
-function dataTable(data) {
-  let keys = Object.keys(data[0]);
-  let headers = keys.map(name =>
-    new UnderlinedCell( new TextCell(name) )
-  );
-  return headers;
-}
 
-function drawTable(rows) {
-  let widths = colWidths(rows),
-      heights = rowHeights(rows);
 
-  return drawLine(rows.map(drawRow));
-
-  function drawRow(cell, n) {
-    return cell.draw(widths[n], heights[n]);
-  }
-  function drawLine(lines) {
-    let line = lines[0].map((_, i) => // create an array with length == row height
-      lines.map(block => block[i]) // combine all strings in the i position
-          .reduce((sentence1, sentence2) => sentence1 + ' ' + sentence2)
-    )
-    return line.join('\n'); // combine all lines wih a newline seperator between
-  }
-}
-
+Common functions used in the examples:
+```js
 function colWidths(rows) {
   return rows.map(row => // create new array of equal size as rows
     row.minWidth() // fill each row with the minimum width (using the cell's minWidth method) 
@@ -85,9 +80,6 @@ function rowHeights(rows) {
 }
 
 function replicate(string, times) {
-  let ret = '';
-  while (times --> 0) {
-    ret += string;
-  }
-  return ret;
+  return times < 1 ? '' : string + replicate(string, times - 1);
 }
+```
