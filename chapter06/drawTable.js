@@ -2,8 +2,10 @@
 
 const Trait = require('traits.js');
 
-function replicate(string, times) {
-  return times < 1 ? '' : (string + replicate(string, times - 1));
+function replicate(x, times) {
+  if(times < 1 || x.length === 0) return [];
+  else return x.concat( replicate(x, times-1) );
+  // return times < 1 ? '' : string + replicate(x, times - 1);
 }
 
 function TextCell(text) {
@@ -20,7 +22,7 @@ TextCell.prototype.draw = function(width, height) {
   let result = [];
   for (let i = 0; i < height; i++) {
     let line = this.text[i] || '';
-    result.push(line + replicate(' ', width - line.length));
+    result.push([line].concat( replicate([' '], width - line.length)).join(''));
   }
   return result;
 };
@@ -36,7 +38,7 @@ UnderlinedCell.prototype.minHeight = function() {
 };
 UnderlinedCell.prototype.draw = function(width, height) {
   return this.inner.draw(width, height - 1)
-    .concat([replicate('-', width)]);
+    .concat([replicate(['-'], width).join('')]);
 };
 
 function RTextCell(text) {
@@ -47,7 +49,7 @@ RTextCell.prototype.draw = function(width, height) {
   let result = [];
   for(let i = 0; i < height; i++) {
     let line = this.text[i] || '';
-    result.push(replicate(' ', width - line.length) + line);
+    result.push(replicate([' '], width - line.length).concat(line).join(''));
   }
   return result;
 };
@@ -96,7 +98,7 @@ function rowHeights(rows) {
 function colWidths(rows) {
   return rows[0].map((_, i) => // create an array of equal size as rows[0]
     rows.reduce((max, row) => // return the longest length of characters
-     Math.max(max, row[i].minWidth()) // find the longest length of 
+     Math.max(max, row[i].minWidth()) // find the longest length of two 
     , 0)
   );
 }
@@ -126,6 +128,7 @@ function dataTable(data) {
   );
   // capitalize header row
   headers.forEach(header => { header.capitalize(); });
+
   let body = data.map(row =>
     keys.map(name => {
       let value = row[name];
