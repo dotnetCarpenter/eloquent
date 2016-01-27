@@ -138,6 +138,7 @@ function dataTable(data) {
         return new TextCell(String(value));
     })
   );
+  console.dir( [headers].concat(body))
   return [headers].concat(body);
 }
 

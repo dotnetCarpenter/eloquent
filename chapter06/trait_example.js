@@ -34,6 +34,7 @@ class EnumerableTrait
 //   return Trait(EnumerableTrait.prototype);
 // }
 // EnumerableTrait.prototype = {
+//   constructor: EnumerableTrait,
 //   map: function(fun) { /* not used */; },
 //   inject: function(init, accum) {
 //     var r = init;

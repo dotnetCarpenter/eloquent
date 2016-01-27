@@ -23,7 +23,7 @@ const dataList = [ // Cannabis varieties - source: http://www.turiba.lv/f/Latvij
 
 #### Case 1 - Object Composition ####
 
-Foobar
+
  
 ```js
 function TextCell(text) {
