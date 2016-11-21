@@ -1,0 +1,8 @@
+{
+  "name": "life",
+  "version": "1.0.0",
+  "description": "Project 1",
+  "main": "life.js",
+  "author": "dotnetCarpenter <jon.ronnenberg@gmail.com>",
+  "license": "MIT"
+}
