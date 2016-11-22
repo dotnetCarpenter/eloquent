@@ -2,7 +2,8 @@
 
 const World = require("./world").World
 const Wall = require("./world").Wall
-const BouncingCritter = require("./critters").BouncingCritter
+const critters = require("./critters")
+const randomElement = require("./util").randomElement
 
 
 const plan = ["############################",
@@ -15,11 +16,14 @@ const plan = ["############################",
               "#          #          o    #",
               "#             o            #",
               "#      #           ### #   #",
-              "#                          #",
+              "#o                         #",
               "############################"]
 
 
-let world = new World(plan, { "#": Wall, o: BouncingCritter})
+let world = new World( plan,
+  { "#": Wall,
+    "o": randomElement(Object.values(critters)) }
+)
 console.log( world.toString() )
 setInterval(tick, 160)
 const start = Date.now()
