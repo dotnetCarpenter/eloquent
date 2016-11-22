@@ -35,8 +35,8 @@ const plan = ["############################",
               "############################"]
 let world = new World(plan, { "#": Wall, o: BouncingCritter})
 let result = world.toString()
-//assert.equal(plan.join("\n") + "\n", result, "Its equal to 'plan' but with a new-line in the end")
-assert.equal(plan.join("\n"), result)
+assert.equal(plan.join("\n") + "\n", result, "Its equal to 'plan' but with a new-line in the end")
+
 
 
 /*console.dir(assert)*/
