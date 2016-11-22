@@ -5,6 +5,7 @@ const Vector = util.Vector
 const elementFromChar = util.elementFromChar
 const charFromElement = util.charFromElement
 const directions = util.directions
+const randomElement = util.randomElement
 
 class Grid {
 	constructor(width, height) {

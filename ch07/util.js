@@ -46,7 +46,7 @@ module.exports = {
 	Vector,					// world.js
 	directions,			// world.js
 	directionNames, // critters.js
-	randomElement,  // critters.js
+	randomElement,  // critters.js/world.js
 	elementFromChar,// world.js
 	charFromElement // world.js
 }

@@ -21,10 +21,10 @@ const plan = ["############################",
 
 let world = new World(plan, { "#": Wall, o: BouncingCritter})
 console.log( world.toString() )
-setInterval(tick, 200)
+setInterval(tick, 160)
 const start = Date.now()
 function tick() {
   world.turn()
-  console.log(`${((Date.now() - new Date(start)) / 1000).toFixed(2)} seconds`)
+  console.log(`\t\t${((Date.now() - start) / 1000).toFixed(2)} seconds`)
   console.log( world.toString() )
 }
