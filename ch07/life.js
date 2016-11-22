@@ -4,9 +4,6 @@ const sim = require("./simulation")
 const World = sim.World
 const Wall = sim.Wall
 const critters = require("./critters")
-const randomElement = require("./util").randomElement
-
-
 const plan = ["############################",
               "#                      ±##o#",
               "#           o          #   #",

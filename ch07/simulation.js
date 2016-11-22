@@ -58,7 +58,7 @@ class World {
       }
     })
 		// write critters name and direction
-		console.log(acted.map(c => `${c.name||c.constructor.name}\tis moving ${c.direction}`).join("\n"))
+		//console.log(acted.map(c => `${c.name||c.constructor.name}\tis moving ${c.direction}`).join("\n"))
   }
 
   _letAct(critter, vector) {
