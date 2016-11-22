@@ -1,13 +1,14 @@
 "use strict"
 
 const assert = require("assert")
-const life = require("./life")
+const life = require("./world")
 const Grid = life.Grid
-const Vector = life.Vector
-const directionNames = life.directionNames
 const World = life.World
 const Wall = life.Wall
-const BouncingCritter = life.BouncingCritter
+const util = require("./util")
+const Vector = util.Vector
+const directionNames = util.directionNames
+const BouncingCritter = require("./critters").BouncingCritter
 
 
 assert.doesNotThrow(() => new Grid(5, 5))
