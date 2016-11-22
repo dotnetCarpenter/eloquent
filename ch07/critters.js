@@ -21,8 +21,8 @@ class BouncingCritter {
 
 class WallFollower {
 	constructor() {
-		const names = ["Ani", "Iskra"]
-		this.name = randomElement(names)		
+		const names = ["Jashua", "Jesus", "Joseph", "Paul"]
+		this.name = randomElement(names)
 		this.dir = "s"
 	}
 

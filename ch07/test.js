@@ -1,10 +1,10 @@
 "use strict"
 
 const assert = require("assert")
-const life = require("./world")
-const Grid = life.Grid
-const World = life.World
-const Wall = life.Wall
+const sim = require("./simulation")
+const Grid = sim.Grid
+const World = sim.World
+const Wall = sim.Wall
 const util = require("./util")
 const Vector = util.Vector
 const directionNames = util.directionNames

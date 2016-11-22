@@ -1,28 +1,30 @@
 "use strict"
 
-const World = require("./world").World
-const Wall = require("./world").Wall
+const sim = require("./simulation")
+const World = sim.World
+const Wall = sim.Wall
 const critters = require("./critters")
 const randomElement = require("./util").randomElement
 
 
 const plan = ["############################",
-              "#                       ##o#",
+              "#                      ±##o#",
               "#           o          #   #",
               "#               ###        #",
               "#   ###           #        #",
-              "#    #    o        #       #",
+              "#    #    o    ±   #       #",
               "#    #                     #",
               "#          #          o    #",
               "#             o            #",
               "#      #           ### #   #",
-              "#o                         #",
+              "#±                         #",
               "############################"]
 
 
 let world = new World( plan,
   { "#": Wall,
-    "o": randomElement(Object.values(critters)) }
+    "o": critters.BouncingCritter,
+    "±": critters.WallFollower }
 )
 console.log( world.toString() )
 setInterval(tick, 160)
