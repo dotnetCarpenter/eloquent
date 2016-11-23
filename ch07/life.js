@@ -24,7 +24,7 @@ let world = new World( plan,
     "±": critters.WallFollower }
 )
 console.log( world.toString() )
-setInterval(tick, 160)
+setInterval(tick, 500)
 const start = Date.now()
 function tick() {
   world.turn()

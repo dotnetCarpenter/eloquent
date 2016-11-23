@@ -62,6 +62,9 @@ class LifelikeWorld extends World {
 			if(critter.energy <= 0)
 				this.grid.set(vector, null) // die
 		}
+
+    console.log(`Energy: ${critter.energy.toFixed(1)}\tAction: ${action && action.type||"nothing"}\tType: ${critter.constructor.name}`)
+
 	}
 }
 
@@ -86,12 +89,12 @@ class PlantEater {
 
 	act(view) {
 		const space = view.find(" ")
-		
+
 		if(this.energy > 60 && space)
 			return {type: "reproduce", direction: space}
-		
+
 		const plant = view.find("*")
-		
+
 		if(plant) return {type: "eat", direction: plant}
 		if(space) return {type: "move", direction: space}
 	}

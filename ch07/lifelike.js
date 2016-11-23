@@ -25,7 +25,7 @@ const valley = new World(
 )
 
 console.log( valley.toString() )
-setInterval(tick, 160)
+setInterval(tick, 300)
 const start = Date.now()
 function tick() {
   valley.turn()

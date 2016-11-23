@@ -57,8 +57,6 @@ class World {
         this._letAct(critter, vector)
       }
     })
-		// write critters name and direction
-		//console.log(acted.map(c => `${c.name||c.constructor.name}\tis moving ${c.direction}`).join("\n"))
   }
 
   _letAct(critter, vector) {
@@ -70,6 +68,7 @@ class World {
         this.grid.set(dest, critter)
       }
     }
+    console.log(`${critter.constructor.name}\t${critter.name}\tis moving ${critter.direction}`)
   }
 
   _checkDestination(action, vector) {
