@@ -113,7 +113,6 @@ class YetAnotherCritter extends PlantEater {
 	}
 
 	set direction(value) {
-		if(value == " ") debugger
 		this.dir = value
 	}
 	get direction() {
@@ -122,7 +121,7 @@ class YetAnotherCritter extends PlantEater {
 
 	act(view) {
 		// use old behavior if energy is above 10 but stop eating if energy is above 20
-		if(this.energy > 10)
+		if(this.energy > 12)
 			return this._doAsUsual(view)
 
 		// head off in one direction either to find food
@@ -131,7 +130,7 @@ class YetAnotherCritter extends PlantEater {
 
 	_doAsUsual(view) {
 		const action = super.act(view)
-		if(action.type === "eat" && this.energy >= 65)
+		if(action.type === "eat" && this.energy >= 50)
 			return this._stopEating(view)
 
 		this.direction = action.direction
