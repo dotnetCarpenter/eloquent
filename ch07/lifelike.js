@@ -12,7 +12,7 @@ const valley = new World(
    "#####                 ######" ,
    "##   ***                **##" ,
    "#   *##**           ** O *##" ,
-   "#    ***     O      ##**  *#" ,
+   "#    ***            ##**  *#" ,
    "#       O           ##***  #" ,
    "#                   ##**   #" ,
    "#   O       #*             #" ,
@@ -26,7 +26,7 @@ const valley = new World(
 )
 
 console.log( valley.toString() )
-setInterval(tick, 300)
+setInterval(tick, 150)
 const start = Date.now()
 function tick() {
   valley.turn()

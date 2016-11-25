@@ -66,7 +66,7 @@ class LifelikeWorld extends World {
 				this.grid.set(vector, null) // die
 		}
 
-		if(action == null || action.type !== "grow")
+		if(action == null || critter.constructor.name !== "Plant")
     	console.log(
 `Energy: ${critter.energy.toFixed(1)}\tAction: ${handled && action && action.type||"nothing"}\ttype: ${critter.constructor.name}`
 			)
@@ -113,6 +113,7 @@ class YetAnotherCritter extends PlantEater {
 	}
 
 	set direction(value) {
+		if(value == " ") debugger
 		this.dir = value
 	}
 	get direction() {
@@ -130,7 +131,7 @@ class YetAnotherCritter extends PlantEater {
 
 	_doAsUsual(view) {
 		const action = super.act(view)
-		if(action.type === "eat" && this.energy >= 20)
+		if(action.type === "eat" && this.energy >= 70)
 			return this._stopEating(view)
 
 		this.direction = action.direction
@@ -153,8 +154,7 @@ class YetAnotherCritter extends PlantEater {
 		}
 
 		// if not then look for space in the direction we are heading
-		this.direction = view.look(this.direction)
-		if(this.direction != " ")
+		if(view.look(this.direction) != " ")
 			this.direction = view.find(" ") || "s"
 
 		return { type: "move", direction: this.direction }
