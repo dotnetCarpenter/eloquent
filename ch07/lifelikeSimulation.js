@@ -4,7 +4,10 @@ const sim = require("./simulation")
 const World = sim.World
 const Wall = sim.Wall
 const View = sim.View
-const elementFromChar = require("./util").elementFromChar
+const util = require("./util")
+const elementFromChar = util.elementFromChar
+const randomElement = util.randomElement
+const directionNames = util.directionNames
 
 const actionTypes = Object.create(null)
 actionTypes.grow = critter => {
@@ -63,7 +66,10 @@ class LifelikeWorld extends World {
 				this.grid.set(vector, null) // die
 		}
 
-    console.log(`Energy: ${critter.energy.toFixed(1)}\tAction: ${action && action.type||"nothing"}\tType: ${critter.constructor.name}`)
+		if(action == null || action.type !== "grow")
+    	console.log(
+`Energy: ${critter.energy.toFixed(1)}\tAction: ${handled && action && action.type||"nothing"}\ttype: ${critter.constructor.name}`
+			)
 
 	}
 }
@@ -100,9 +106,65 @@ class PlantEater {
 	}
 }
 
+class YetAnotherCritter extends PlantEater {
+	constructor() {
+		super()
+		this.dir = randomElement(directionNames)
+	}
+
+	set direction(value) {
+		this.dir = value
+	}
+	get direction() {
+		return this.dir
+	}
+
+	act(view) {
+		// use old behavior if energy is above 10 but stop eating if energy is above 20
+		if(this.energy > 10)
+			return this._doAsUsual(view)
+
+		// head off in one direction either to find food
+		return this._findPlant(view)
+	}
+
+	_doAsUsual(view) {
+		const action = super.act(view)
+		if(action.type === "eat" && this.energy >= 20)
+			return this._stopEating(view)
+
+		this.direction = action.direction
+		return action
+	}
+
+	_stopEating(view) {
+		if (view.look(this.direction) != " ")
+			this.direction = view.find(" ") || "s"
+
+		return {type: "move", direction: this.direction}
+	}
+
+	_findPlant(view) {
+		// look for plant around
+		const plant = view.find("*")
+		if(plant) {
+			this.direction = plant
+			return { type: "eat", direction: plant }
+		}
+
+		// if not then look for space in the direction we are heading
+		this.direction = view.look(this.direction)
+		if(this.direction != " ")
+			this.direction = view.find(" ") || "s"
+
+		return { type: "move", direction: this.direction }
+	}
+}
+
 module.exports = {
 	Plant,
 	PlantEater,
+	YetAnotherCritter,
 	Wall,
 	World: LifelikeWorld,
 }

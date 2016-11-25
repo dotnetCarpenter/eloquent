@@ -4,7 +4,8 @@ const sim = require("./lifelikeSimulation")
 const World = sim.World
 const Wall = sim.Wall
 const Plant = sim.Plant
-const PlantEater = sim.PlantEater
+//const PlantEater = sim.PlantEater
+const PlantEater = sim.YetAnotherCritter
 
 const valley = new World(
   ["############################" ,
