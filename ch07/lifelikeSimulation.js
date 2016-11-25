@@ -131,7 +131,7 @@ class YetAnotherCritter extends PlantEater {
 
 	_doAsUsual(view) {
 		const action = super.act(view)
-		if(action.type === "eat" && this.energy >= 70)
+		if(action.type === "eat" && this.energy >= 65)
 			return this._stopEating(view)
 
 		this.direction = action.direction
