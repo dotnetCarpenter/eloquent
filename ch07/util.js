@@ -25,7 +25,14 @@ const directions = {
 const directionNames = Object.keys(directions)
 
 function randomElement(array) {
-  return array[Math.floor(Math.random() * array.length)]
+	const a = array.slice(0)
+	for(let i = a.length - 1; i >= 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1))
+		const item = a[j]
+		a[j] = a[i]
+		a[i] = item
+	}
+	return a[0]
 }
 
 function elementFromChar(legend, ch) {
