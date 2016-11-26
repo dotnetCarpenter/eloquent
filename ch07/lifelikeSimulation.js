@@ -62,35 +62,38 @@ class LifelikeWorld extends World {
 
 		if(!handled) {
 			critter.energy -= 0.2
-			if(critter.energy <= 0)
+			if(critter.energy <= 0) {
 				this.grid.set(vector, null) // die
+			}
 		}
 
-		if(action == null || critter.constructor.name !== "Plant")
-    	console.log(
-`Energy: ${critter.energy.toFixed(1)}\tAction: ${handled && action && action.type||"nothing"}\ttype: ${critter.constructor.name}`
-			)
-
+		critter.action = action
+		critter.actionSuccessfull = handled
 	}
 }
 
 class Plant {
 	constructor() {
 		this.energy = 3 + Math.random() * 4
+		this.mentalStatus = "Growing"
 	}
 
 	act(view) {
 		if(this.energy > 15) {
+			this.mentalStatus = "Reproducing - looking to expand"
 			const space = view.find(" ")
 			if(space) return {type: "reproduce", direction: space}
 		}
+		this.mentalStatus = "Growing"
 		if(this.energy < 20) return {type: "grow"}
+		this.mentalStatus = "Flowering"
 	}
 }
 
 class PlantEater {
 	constructor() {
 		this.energy = 20
+		this.mentalStatus = "Content with life"
 	}
 
 	act(view) {
@@ -109,14 +112,7 @@ class PlantEater {
 class YetAnotherCritter extends PlantEater {
 	constructor() {
 		super()
-		this.dir = randomElement(directionNames)
-	}
-
-	set direction(value) {
-		this.dir = value
-	}
-	get direction() {
-		return this.dir
+		this.direction = randomElement(directionNames)
 	}
 
 	act(view) {
@@ -129,6 +125,8 @@ class YetAnotherCritter extends PlantEater {
 	}
 
 	_doAsUsual(view) {
+		this.mentalStatus = "Happy with life"
+
 		const action = super.act(view)
 		if(action.type === "eat" && this.energy >= 50)
 			return this._stopEating(view)
@@ -138,13 +136,17 @@ class YetAnotherCritter extends PlantEater {
 	}
 
 	_stopEating(view) {
+		this.mentalStatus = "Satiated - looking for space"
+
 		if (view.look(this.direction) != " ")
 			this.direction = view.find(" ") || "s"
 
-		return {type: "move", direction: this.direction}
+		return { type: "move", direction: this.direction }
 	}
 
 	_findPlant(view) {
+		this.mentalStatus = this.energy < 1 ? "Dying..." : "Hungry - looking for food"
+
 		// look for plant around
 		const plant = view.find("*")
 		if(plant) {
@@ -160,10 +162,29 @@ class YetAnotherCritter extends PlantEater {
 	}
 }
 
+class CritterInformation {
+	constructor(critter) {
+		this.critter = critter
+	}
+
+	info() {
+		const info = {
+			name: this.critter.constructor.name
+		}
+		Object
+			.keys(this.critter)
+			.forEach(property => {
+				info[property] = this.critter[property]
+			})
+		return info
+	}
+}
+
 module.exports = {
 	Plant,
 	PlantEater,
 	YetAnotherCritter,
 	Wall,
 	World: LifelikeWorld,
+	CritterInformation
 }
