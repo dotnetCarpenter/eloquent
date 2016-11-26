@@ -6,6 +6,7 @@ const Wall = sim.Wall
 const Plant = sim.Plant
 //const PlantEater = sim.PlantEater
 const PlantEater = sim.YetAnotherCritter
+const BetterPlanFinder = sim.BetterPlanFinder
 const Info = sim.CritterInformation
 
 const valley1 = new World(
@@ -30,7 +31,7 @@ const valley2 = new World(
    "#####                                             ######" ,
    "##   ***                                            **##" ,
    "#   *##**                                       ** O *##" ,
-   "#    ***                                        ##**  *#" ,
+   "#    ***                   *                    ##**  *#" ,
    "#       O                                       ##***  #" ,
    "#                                               ##**   #" ,
    "#   O                                 #*               #" ,
@@ -40,6 +41,7 @@ const valley2 = new World(
    "########################################################"],
   {"#": Wall,
    "O": PlantEater,
+   /*"0": BetterPlanFinder,*/
    "*": Plant }
 )
 

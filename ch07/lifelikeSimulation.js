@@ -8,6 +8,7 @@ const util = require("./util")
 const elementFromChar = util.elementFromChar
 const randomElement = util.randomElement
 const directionNames = util.directionNames
+const directions = util.directions
 
 const actionTypes = Object.create(null)
 actionTypes.grow = critter => {
@@ -128,8 +129,9 @@ class YetAnotherCritter extends PlantEater {
 		this.mentalStatus = "Happy with life"
 
 		const action = super.act(view)
-		if(action.type === "eat" && this.energy >= 50)
+		if(action.type === "eat" && this.energy >= 50) {
 			return this._stopEating(view)
+		}
 
 		this.direction = action.direction
 		return action
@@ -162,6 +164,27 @@ class YetAnotherCritter extends PlantEater {
 	}
 }
 
+class BetterPlanFinder extends YetAnotherCritter {
+	constructor() {
+		super()
+		this.lastKnownFoodLocation
+	}
+
+	act(view) {
+		const action = super.act(view)
+		
+		if(action.type === "eat")
+			this.lastKnownFoodLocation = view.vector.plus(directions[action.direction])
+		
+		if(this.mentalStatus.indexOf("Hungry") !== -1) {
+			//TODO Go to last known food location somehow
+			this.lastKnownFoodLocation
+		}
+
+		return action
+	}
+}
+
 class CritterInformation {
 	constructor(critter) {
 		this.critter = critter
@@ -184,6 +207,7 @@ module.exports = {
 	Plant,
 	PlantEater,
 	YetAnotherCritter,
+	BetterPlanFinder,
 	Wall,
 	World: LifelikeWorld,
 	CritterInformation
