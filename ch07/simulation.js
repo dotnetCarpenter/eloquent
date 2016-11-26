@@ -36,6 +36,15 @@ class Grid {
       }
     }
   }
+
+  map(f, context) {
+    const result = []
+    this.forEach( (critter, vector) => {
+      const collect = f(critter, vector)
+      if(collect) result.push(collect)
+    }, context)
+    return result
+  }
 }
 
 class World {
