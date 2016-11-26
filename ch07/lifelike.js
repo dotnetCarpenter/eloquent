@@ -3,11 +3,12 @@
 const sim = require("./lifelikeSimulation")
 const World = sim.World
 const Wall = sim.Wall
-const Plant = sim.Plant
-//const PlantEater = sim.PlantEater
-const PlantEater = sim.YetAnotherCritter
-const BetterPlanFinder = sim.BetterPlanFinder
 const Info = sim.CritterInformation
+const critters = require("./newCritters")
+const Plant = critters.Plant
+//const PlantEater = critters.PlantEater
+const PlantEater = critters.YetAnotherCritter
+//const BetterPlanFinder = critters.BetterPlantFinder
 
 const valley1 = new World(
   ["############################" ,
@@ -28,16 +29,17 @@ const valley1 = new World(
 )
 const valley2 = new World(
   ["########################################################" ,
-   "#####                                             ######" ,
+   "#####                                         ##########" ,
    "##   ***                                            **##" ,
    "#   *##**                                       ** O *##" ,
    "#    ***                   *                    ##**  *#" ,
    "#       O                                       ##***  #" ,
-   "#                                               ##**   #" ,
-   "#   O                                 #*               #" ,
-   "#*          #**                                   O    #" ,
-   "#***                                    ##**     O   **#" ,
-   "##****     ###***                                   *###" ,
+   "#                        *#                     ##**   #" ,
+   "#   O                     #           #*               #" ,
+   "#*          #**           #                       O    #" ,
+   "#***                      #             ##**     O   **#" ,
+   "##****     ###***         #                         *###" ,
+   "##            * *               *                   *###" ,
    "########################################################"],
   {"#": Wall,
    "O": PlantEater,
@@ -60,7 +62,7 @@ function tick() {
     if( ! (critter instanceof PlantEater) ) return
     return new Info(critter).info()
   })
-  
+
   const maxInfoRows = 20|0
   const infoRows = info.length
   info.splice(maxInfoRows)
