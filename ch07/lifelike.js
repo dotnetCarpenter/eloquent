@@ -8,7 +8,7 @@ const critters = require("./newCritters")
 const Plant = critters.Plant
 //const PlantEater = critters.PlantEater
 const PlantEater = critters.YetAnotherCritter
-//const BetterPlanFinder = critters.BetterPlantFinder
+const BetterPlanFinder = critters.BetterPlantFinder
 
 const valley1 = new World(
   ["############################" ,
@@ -30,28 +30,30 @@ const valley1 = new World(
 const valley2 = new World(
   ["########################################################" ,
    "#####                                         ##########" ,
-   "##   ***                                            **##" ,
-   "#   *##**                                       ** O *##" ,
-   "#    ***                   *                    ##**  *#" ,
-   "#       O                                       ##***  #" ,
-   "#                        *#                     ##**   #" ,
-   "#   O                     #           #*               #" ,
+   "##   ***   0                                        **##" ,
+   "#   *##**                              O        ** O *##" ,
+   "#    ***                  **                    ##**  *#" ,
+   "#                        *#######               ##***  #" ,
+   "#                       **#                     ##**   #" ,
+   "#                         #           #*               #" ,
    "#*          #**           #                       O    #" ,
    "#***                      #             ##**     O   **#" ,
    "##****     ###***         #                         *###" ,
-   "##            * *               *                   *###" ,
+   "##            *O*               *                   *###" ,
+   "###                             #                  #####" ,   
    "########################################################"],
   {"#": Wall,
    "O": PlantEater,
-   /*"0": BetterPlanFinder,*/
+   "0": BetterPlanFinder,
    "*": Plant }
 )
 
 
 let turnCounter = 0|0
+const gameSpeed = 200
 
-setInterval(tick, 100)
-const start = Date.now() + 100
+setInterval(tick, gameSpeed)
+const start = Date.now() + gameSpeed
 function tick() {
   valley2.turn()
 

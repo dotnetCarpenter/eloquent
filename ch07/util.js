@@ -9,6 +9,14 @@ class Vector {
 	plus(other) {
 	  return new Vector(this.x + other.x, this.y + other.y)
 	}
+
+	subtract(other) {
+		return new Vector(this.x - other.x, this.y - other.y)
+	}
+
+	toString() {
+		return `x${this.x}y${this.y}`		
+	}
 }
 
 const directions = {

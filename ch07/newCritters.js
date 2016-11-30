@@ -4,6 +4,10 @@ const util = require("./util")
 const directionNames = util.directionNames
 const directions = util.directions
 const randomElement = util.randomElement
+/**
+ * @type {Vector}
+ */
+const Vector = util.Vector
 
 class Plant {
 	constructor() {
@@ -50,7 +54,7 @@ class YetAnotherCritter extends PlantEater {
 
 	act(view) {
 		// use old behavior if energy is above 10 but stop eating if energy is above 20
-		if(this.energy > 15)
+		if(this.energy > 20)
 			return this._doAsUsual(view)
 
 		// head off in one direction either to find food
@@ -99,7 +103,7 @@ class YetAnotherCritter extends PlantEater {
 class BetterPlantFinder extends YetAnotherCritter {
 	constructor() {
 		super()
-		this.lastKnownFoodLocation
+		this.lastKnownFoodLocation = null
 	}
 
 	act(view) {
@@ -108,13 +112,61 @@ class BetterPlantFinder extends YetAnotherCritter {
 		if(action.type === "eat")
 			this.lastKnownFoodLocation = view.vector.plus(directions[action.direction])
 
-		if(this.mentalStatus.indexOf("Hungry") !== -1) {
+/*		if(this.mentalStatus.indexOf("Hungry") !== -1) {
 			//TODO Go to last known food location somehow
 			this.lastKnownFoodLocation
-		}
+		}*/
 
 		return action
 	}
+
+	_findPlant(view) {
+		if(!this.lastKnownFoodLocation) return super._findPlant(view)
+
+		const plant = view.find("*")
+		if(plant) {
+			this.direction = plant
+			return { type: "eat", direction: plant }
+		}
+
+		this.mentalStatus = "\u001B[31m" + (this.energy < 1 ? "Dying..." : "Hungry - looking for food") + "\u001B[39m"
+
+		const plantDirection = findDirection(view.vector, this.lastKnownFoodLocation)
+		if(!plantDirection) {
+			this.lastKnownFoodLocation = null
+			return super._findPlant(view)
+		}
+
+		this.direction = plantDirection
+		return { type:"move", direction:plantDirection }
+	}
+}
+
+/**
+ * @param {Vector} start A Vector
+ * @param {Vector} end
+ * @returns {string} A compass point like "e" or "nw"
+ */
+function findDirection(start, end) {
+	let dir = end.subtract(start)
+
+	if(dir.x === 0 && dir.y === 0) return null // we are at the end vector point
+	
+	const compassDirection = new Vector(
+		normalizeDirection(dir.x),
+		normalizeDirection(dir.y)
+	)
+	for(let point in directions) {
+		if(directions[point].toString() === compassDirection.toString())
+			return point
+	}
+	throw new Error(`Failed to find ${compassDirection.toString()}`)
+}
+
+function normalizeDirection(dir) {
+	if(dir < 0) return -1
+	else if(dir > 0) return 1
+	else return 0
 }
 
 class Predator {
@@ -122,11 +174,11 @@ class Predator {
 		this.energy = 40
 		this.mentalStatus = ""
 		this.direction = "s"
-
+		this.lastKnownFoodLocation
 	}
 
 	act(view) {
-
+		
 	}
 }
 

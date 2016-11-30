@@ -59,6 +59,8 @@ class LifelikeWorld extends World {
 			actionTypes[action.type].call(this, critter, vector, action)
 
 		if(!handled) {
+			// make critter red - will break elementFromChar used in reproduce function
+			//critter.originChar = "\u001B[31m" + critter.originChar + "\u001B[39m"
 			critter.energy -= 0.2
 			if(critter.energy <= 0) {
 				this.grid.set(vector, null) // die
