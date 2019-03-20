@@ -10,7 +10,7 @@
     "url": "https://github.com/dotnetCarpenter/eloquent.git"
   },
   "author": "dotnetcarpenter <jon.ronnenberg@gmail.com>",
-  "license": "WTFPL",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/dotnetCarpenter/eloquent/issues"
   },
