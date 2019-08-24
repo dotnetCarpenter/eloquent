@@ -16,61 +16,57 @@ const chessBoard2 = [
   [1,1,0],
 ]
 
+function cell (x, y, value) {
+  return [ x, y, value ]
+}
+
 main()
 function main () {
   test(() => {
-    let actual = []
-    let expected = [1, 1, 1]
-    diagonal(chessBoard1, map(actual))
+    const expected = [cell(0, 0, 1), cell(1, 1, 1), cell(2, 2, 1)]
+    const actual = map(diagonal, chessBoard1, 0, 0)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
-    const actual = []
-    const expected = [1, 0, 0]
-    diagonal(chessBoard2, map(actual))
+    const expected = [cell(0, 0, 1), cell(1, 1, 0), cell(2, 2, 0)]
+    const actual = map(diagonal, chessBoard2, 0, 0)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
-    const actual = []
-    const expected = [1, 1]
-    up(chessBoard1, 1, 1, map(actual))
+    const expected = [cell(1, 1, 1), cell(1, 0, 1)]
+    const actual = map(up, chessBoard1, 1, 1)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
-    const actual = []
-    const expected = [0, 1]
-    up(chessBoard2, 1, 1, map(actual))
+    const expected = [cell(1, 1, 0), cell(1, 0, 1)]
+    const actual = map(up, chessBoard2, 1, 1)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
-    const actual = []
-    const expected = [1, 1, 1]
-    up(chessBoard1, 2, 2, map(actual))
+    const expected = [cell(2, 2, 1), cell(2, 1, 1), cell(2, 0, 1)]
+    const actual = map(up, chessBoard1, 2, 2)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
-    const actual = []
-    const expected = [0, 1, 1]
-    up(chessBoard2, 2, 2, map(actual))
+    const expected = [cell(2, 2, 0), cell(2, 1, 1), cell(2, 0, 1)]
+    const actual = map(up, chessBoard2, 2, 2)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
-    const actual = []
-    const expected = [0, 1, 1]
-    left(chessBoard2, 2, 2, map(actual))
+    const expected = [cell(2, 2, 0), cell(1, 2, 1), cell(0, 2, 1)]
+    const actual = map(left, chessBoard2, 2, 2)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
-    const actual = []
-    const expected = [1, 0, 1]
-    left(chessBoard2, 2, 1, map(actual))
+    const expected = [cell(2, 1, 1), cell(1, 1, 0), cell(0, 1, 1)]
+    const actual = map(left, chessBoard2, 2, 1)
     assert.deepStrictEqual(actual, expected)
   })
 }
@@ -82,10 +78,18 @@ function test (f) {
   f()
 }
 
+
 /**
  * Ad-hoc mapping function.
- * @param {any[]} [array] Optional out argument
+ * @param {function} f A generator function
+ * @param {...any} args
  */
-function map (array = []) {
-  return x => (array.push(x), array)
+function map (f, ...args) {
+  const results = []
+
+  for (let values of f(...args)) {
+    results.push(values)
+  }
+
+  return results
 }
