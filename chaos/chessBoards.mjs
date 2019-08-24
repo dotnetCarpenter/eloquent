@@ -15,14 +15,14 @@
 
 // main()
 // function main () {
-//   let [x, y] = maxSize(diagonal, chessBoard1)
+//   let [x, y] = maxSize(diagonal, chessBoard2, 0, 0)
 //   console.log(x, y)
 // }
 
-export function maxSize (direction, board) {
+export function maxSize (direction, board, ...coordinates) {
   let x, y, value
 
-  for ([x, y, value] of direction(board)) {
+  for ([x, y, value] of direction(board, ...coordinates)) {
     if (value === 0) break
   }
 
