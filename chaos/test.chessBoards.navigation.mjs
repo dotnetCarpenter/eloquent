@@ -3,7 +3,7 @@
 'use strict'
 
 import assert from 'assert'
-import { diagonal, up, left, maxSize } from './chessBoards.mjs'
+import { diagonal, up, left, maxSquare } from './chessBoards.mjs'
 
 const chessBoard1 = [
   [1,1,1],
@@ -78,13 +78,13 @@ function main () {
 
   test(() => {
     const expected = [2, 2]
-    const actual = maxSize(diagonal, chessBoard1, 0, 0)
+    const actual = maxSquare(diagonal, chessBoard1, 0, 0)
     assert.deepStrictEqual(actual, expected)
   })
 
   test(() => {
     const expected = [1, 1]
-    const actual = maxSize(diagonal, chessBoard2, 0, 0)
+    const actual = maxSquare(diagonal, chessBoard2, 0, 0)
     assert.deepStrictEqual(actual, expected)
   })
 }

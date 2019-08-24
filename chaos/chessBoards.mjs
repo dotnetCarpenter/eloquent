@@ -19,7 +19,7 @@
 //   console.log(x, y)
 // }
 
-export function maxSize (direction, board, ...coordinates) {
+export function maxSquare (direction, board, ...coordinates) {
   let x, y, value
 
   for ([x, y, value] of direction(board, ...coordinates)) {
