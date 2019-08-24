@@ -30,15 +30,13 @@ export function maxSize (direction, board) {
 }
 
 export function* diagonal (board, x, y) {
-  if (x !== y) throw "different x and y is not supported"
-
-  let c = x
   let length = board.length
 
   do {
-    yield [c, c, board[c][c]]
-    c++
-  } while (c < length)
+    yield [x, y, board[y][x]]
+    x++
+    y++
+  } while (x < length && y < length)
 }
 
 export function* up (board, x, y) {

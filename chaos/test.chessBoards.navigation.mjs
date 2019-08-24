@@ -35,6 +35,12 @@ function main () {
   })
 
   test(() => {
+    const expected = [cell(1, 0, 1), cell(2, 1, 1)]
+    const actual = map(diagonal, chessBoard2, 1, 0)
+    assert.deepStrictEqual(actual, expected)
+  })
+
+  test(() => {
     const expected = [cell(1, 1, 1), cell(1, 0, 1)]
     const actual = map(up, chessBoard1, 1, 1)
     assert.deepStrictEqual(actual, expected)
