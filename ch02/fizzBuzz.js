@@ -1,6 +1,6 @@
 'use strict'
 
-for (var c = 1; c <= 100; c++)
+for (var c = 1; c <= 30; c++)
 /*
 // first version
 console.log(
@@ -11,7 +11,7 @@ console.log(
       c
       )
 // second version
-for (var c = 1; c <= 100; c++)
+for (var c = 1; c <= 30; c++)
   console.log(
     c % 3 === 0 && c % 5 === 0 ?
       "FizzBuzz" :
