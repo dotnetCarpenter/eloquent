@@ -2,9 +2,9 @@
 
 namespace ch02
 {
-    class Program
+    class Fizzbuzz
     {
-        static string Fizzbuzz (int n)
+        static string fizzbuzz (int n)
         {
             var s = "";
 
@@ -21,7 +21,8 @@ namespace ch02
 
             for (var c = 1; c <= 30; c++)
             {
-                output.Append (Fizzbuzz (c) + "\n");
+                output.Append (fizzbuzz (c));
+                output.Append ('\n');
             }
 
             Console.WriteLine (output);
