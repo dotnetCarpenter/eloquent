@@ -6,21 +6,25 @@ namespace ch02
     {
         static string Fizzbuzz (int n)
         {
-            var s = new StringBuilder ();
+            var s = "";
 
-            if (n % 3 == 0) s.Insert (0, "Fizz");
-            if (n % 5 == 0) s.Append ("Buzz");
-            if (s.Length == 0) s.Insert (0, n);
+            if (n % 3 == 0) s = "Fizz";
+            if (n % 5 == 0) s += "Buzz";
+            if (s.Length == 0) s = n.ToString ();
 
-            return s.ToString ();
+            return s;
         }
 
         static void Main(string[] args)
         {
+            var output = new StringBuilder ();
+
             for (var c = 1; c <= 30; c++)
             {
-                Console.WriteLine(Fizzbuzz (c));
+                output.Append (Fizzbuzz (c) + "\n");
             }
+
+            Console.WriteLine(output);
         }
     }
 }
