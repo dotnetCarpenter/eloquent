@@ -19,7 +19,7 @@ for (var c = 1; c <= 30; c++)
   )
 */
 // third version (obvious, I didn't understand the task before)
-  console.log(fizzbuzz(c))
+  console.log(fizzbuzz (c))
 
 function fizzbuzz (n) {
   let s = ''

@@ -24,7 +24,7 @@ namespace ch02
                 output.Append (Fizzbuzz (c) + "\n");
             }
 
-            Console.WriteLine(output);
+            Console.WriteLine (output);
         }
     }
 }
